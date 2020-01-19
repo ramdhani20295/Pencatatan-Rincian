@@ -53,9 +53,10 @@ $start = ($page - 1) * $per_hal;
 	<tr>
 		<th class="col-md-1">No</th>
 		<th class="col-md-1">Tanggal</th>
-		<th class="col-md-4">Nama Barang</th>
-		<th class="col-md-2">Harga Jual</th>
-		<th class="col-md-1">Jumlah</th>
+		<th class="col-md-3">Nama Barang</th>
+		<th class="col-md-2">Harga Beli</th>
+		<th class="col-md-1">QTY</th>
+		<th class="col-md-1">Total</th>
 		<!-- <th class="col-md-1">Sisa</th>		 -->
 		<th class="col-md-3">Opsi</th>
 	</tr>
@@ -76,6 +77,7 @@ $start = ($page - 1) * $per_hal;
 			<td><?php echo $b['nama'] ?></td>
 			<td>Rp.<?php echo number_format($b['harga']) ?>,-</td>
 			<td><?php echo $b['jumlah'] ?></td>
+			<td>Rp.<?php echo $b['jumlah'] * $b['harga']?></td>
 			<td>
 				<a href="det_barang.php?id=<?php echo $b['id']; ?>" class="btn btn-info">Detail</a>
 				<a href="edit.php?id=<?php echo $b['id']; ?>" class="btn btn-warning">Edit</a>
@@ -85,17 +87,7 @@ $start = ($page - 1) * $per_hal;
 		<?php 
 	}
 	?>
-	<tr>
-		<td colspan="4">Total Modal</td>
-		<td>			
-		<?php 
-		
-			$x=mysql_query("select sum(modal) as total from barang");	
-			$xx=mysql_fetch_array($x);			
-			echo "<b> Rp.". number_format($xx['total']).",-</b>";		
-		?>
-		</td>
-	</tr>
+	
 </table>
 <ul class="pagination">			
 			<?php 
@@ -107,6 +99,22 @@ $start = ($page - 1) * $per_hal;
 			?>						
 		</ul>
 <!-- modal input -->
+<!-- <?php 
+if(isset($_POST["submit"])){
+	$tanggal = $_POST["tanggal"];
+	$nama = $_POST["nama"];
+	$suplier = $_POST["suplier"];
+	$harga = $_POST["harga"];
+	$jumlah = $_POST["jumlah"];
+	$satuan = $_POST["satuan"];
+
+	$querry = "INSERT INTO malasngoding_kios VALUES ('','$tanggal','$nama','$suplier','$harga','$jumlah','$satuan')";
+	$con = mysql_connect("localhost","root","");
+	$sel = mysql_select_db("malasngoding_kios", $con);
+	mysql_query($sel, $querry);
+
+}
+?> -->
 <div id="myModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -125,25 +133,21 @@ $start = ($page - 1) * $per_hal;
 						<input name="nama" type="text" class="form-control" placeholder="Nama Barang ..">
 					</div>
 					<div class="form-group">
-						<label>Jenis</label>
-						<input name="jenis" type="text" class="form-control" placeholder="Jenis Barang ..">
-					</div>
-					<div class="form-group">
 						<label>Suplier</label>
 						<input name="suplier" type="text" class="form-control" placeholder="Suplier ..">
+					</div>	
+					<div class="form-group">
+						<label>Harga Beli</label>
+						<input name="harga" type="text" class="form-control" placeholder="Harga Beli">
+					</div>	
+					<div class="form-group">
+						<label>QTY</label>
+						<input name="jumlah" type="text" class="form-control" placeholder="QTY">
 					</div>
 					<div class="form-group">
-						<label>Harga Modal</label>
-						<input name="modal" type="text" class="form-control" placeholder="Modal per unit">
-					</div>	
-					<div class="form-group">
-						<label>Harga Jual</label>
-						<input name="harga" type="text" class="form-control" placeholder="Harga Jual per unit">
-					</div>	
-					<div class="form-group">
-						<label>Jumlah</label>
-						<input name="jumlah" type="text" class="form-control" placeholder="Jumlah">
-					</div>																	
+						<label>Satuan</label>
+						<input name="satuan" type="text" class="form-control" placeholder="Satuan ..">
+					</div>
 
 				</div>
 				<div class="modal-footer">

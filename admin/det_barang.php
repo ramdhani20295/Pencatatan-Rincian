@@ -21,17 +21,10 @@ while($d=mysql_fetch_array($det)){
 			<td>Nama</td>
 			<td><?php echo $d['nama'] ?></td>
 		</tr>
-		<tr>
-			<td>Jenis</td>
-			<td><?php echo $d['jenis'] ?></td>
-		</tr>
+		
 		<tr>
 			<td>Suplier</td>
 			<td><?php echo $d['suplier'] ?></td>
-		</tr>
-		<tr>
-			<td>Modal</td>
-			<td>Rp.<?php echo number_format($d['modal']); ?>,-</td>
 		</tr>
 		<tr>
 			<td>Harga</td>
@@ -42,8 +35,8 @@ while($d=mysql_fetch_array($det)){
 			<td><?php echo $d['jumlah'] ?></td>
 		</tr>
 		<tr>
-			<td>Sisa</td>
-			<td><?php echo $d['sisa'] ?></td>
+			<td>Satuan</td>
+			<td><?php echo $d['satuan'] ?></td>
 		</tr>
 	</table>
 	<?php 
