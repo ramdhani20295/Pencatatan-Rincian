@@ -15,6 +15,10 @@ while($d=mysql_fetch_array($det)){
 				<td><input type="hidden" name="id" value="<?php echo $d['id'] ?>"></td>
 			</tr>
 			<tr>
+				<td>Tanggal</td>
+				<td><input type="date" class="form-control" name="nama" value="<?php echo $d['tanggal'] ?>"></td>
+			</tr>
+			<tr>
 				<td>Nama</td>
 				<td><input type="text" class="form-control" name="nama" value="<?php echo $d['nama'] ?>"></td>
 			</tr>

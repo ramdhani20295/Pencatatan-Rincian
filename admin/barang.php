@@ -52,8 +52,9 @@ $start = ($page - 1) * $per_hal;
 <table class="table table-hover">
 	<tr>
 		<th class="col-md-1">No</th>
+		<th class="col-md-1">Tanggal</th>
 		<th class="col-md-4">Nama Barang</th>
-		<th class="col-md-3">Harga Jual</th>
+		<th class="col-md-2">Harga Jual</th>
 		<th class="col-md-1">Jumlah</th>
 		<!-- <th class="col-md-1">Sisa</th>		 -->
 		<th class="col-md-3">Opsi</th>
@@ -71,6 +72,7 @@ $start = ($page - 1) * $per_hal;
 		?>
 		<tr>
 			<td><?php echo $no++ ?></td>
+			<td><?php echo $b['tanggal'] ?></td>
 			<td><?php echo $b['nama'] ?></td>
 			<td>Rp.<?php echo number_format($b['harga']) ?>,-</td>
 			<td><?php echo $b['jumlah'] ?></td>
@@ -114,6 +116,10 @@ $start = ($page - 1) * $per_hal;
 			</div>
 			<div class="modal-body">
 				<form action="tmb_brg_act.php" method="post">
+					<div class="form-group">
+						<label>Tanggal</label>
+						<input name="tanggal" type="date" class="form-control" placeholder="Input Tanggal">
+					</div>
 					<div class="form-group">
 						<label>Nama Barang</label>
 						<input name="nama" type="text" class="form-control" placeholder="Nama Barang ..">

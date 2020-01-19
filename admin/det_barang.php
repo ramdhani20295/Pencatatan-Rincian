@@ -14,6 +14,10 @@ while($d=mysql_fetch_array($det)){
 	?>					
 	<table class="table">
 		<tr>
+			<td>Tanggal</td>
+			<td><?php echo $d['tanggal'] ?></td>
+		</tr>
+		<tr>
 			<td>Nama</td>
 			<td><?php echo $d['nama'] ?></td>
 		</tr>
