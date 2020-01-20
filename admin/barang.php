@@ -99,22 +99,7 @@ $start = ($page - 1) * $per_hal;
 			?>						
 		</ul>
 <!-- modal input -->
-<!-- <?php 
-if(isset($_POST["submit"])){
-	$tanggal = $_POST["tanggal"];
-	$nama = $_POST["nama"];
-	$suplier = $_POST["suplier"];
-	$harga = $_POST["harga"];
-	$jumlah = $_POST["jumlah"];
-	$satuan = $_POST["satuan"];
 
-	$querry = "INSERT INTO malasngoding_kios VALUES ('','$tanggal','$nama','$suplier','$harga','$jumlah','$satuan')";
-	$con = mysql_connect("localhost","root","");
-	$sel = mysql_select_db("malasngoding_kios", $con);
-	mysql_query($sel, $querry);
-
-}
-?> -->
 <div id="myModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -158,10 +143,3 @@ if(isset($_POST["submit"])){
 		</div>
 	</div>
 </div>
-
-
-
-<?php 
-include 'footer.php';
-
-?>

@@ -2,9 +2,7 @@
 include 'config.php';
 $id=$_POST['id'];
 $nama=$_POST['nama'];
-$jenis=$_POST['jenis'];
 $suplier=$_POST['suplier'];
-$modal=$_POST['modal'];
 $harga=$_POST['harga'];
 $jumlah=$_POST['jumlah'];
 
