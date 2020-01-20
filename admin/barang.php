@@ -42,31 +42,22 @@ $start = ($page - 1) * $per_hal;
 	</table>
 	<a style="margin-bottom:10px" href="lap_barang.php" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a>
 </div>
-<form action="" method="get" align="right">
-Tanggal Dari :<input type="date" name="start_date"><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.postform.tanggal_awal);return false;" ></a>
-Sampai Tanggal :<input type="date" name="end_date"><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.postform.tanggal_awal);return false;" ></a>
-<input type="submit" name="search"  value="search" class="btn btn-info">
+<form action="" method="post" align="right">
+<td width="125"><b>Dari Tanggal</b></td>
+<td colspan="2" width="190">: <input type="date" name="tanggal_awal" size="16" />
+</td>
+<td width="125"><b>Sampai Tanggal</b></td>
+<td colspan="2" width="190">: <input type="date" name="tanggal_akhir" size="16" />
+</td>
+<td colspan="2" width="190"><input type="submit" value="cari" name="pencarian"/></td>
 </form>
 
-<?php
-	}else{
-		echo "Informasi : Hasil Pencarian data berdasarkan periode Tanggal";
-		echo $_POST['start_date'];
-		echo $_POST['end_date'];
-		$query = mysql_query("SELECT * FROM barang WHERE tanggal BETWEEN '$start_date' AND '$end_date'");
-	}
-}
-?>
-
-
-
-
-<form action="cari_act.php" method="get">
+<!-- <form action="cari_act.php" method="get">
 	<div class="input-group col-md-5 col-md-offset-7">
 		<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
 		<input type="text" class="form-control" placeholder="Cari barang di sini .." aria-describedby="basic-addon1" name="cari">	
 	</div>
-</form>
+</form> -->
 <br/>
 <table class="table table-hover">
 	<tr>
@@ -81,9 +72,10 @@ Sampai Tanggal :<input type="date" name="end_date"><a href="javascript:void(0)" 
 		<th class="col-md-3">Opsi</th>
 	</tr>
 	<?php 
-	if(isset($_GET['cari'])){
-		$cari=mysql_real_escape_string($_GET['cari']);
-		$brg=mysql_query("select * from barang where nama like '$cari' or jenis like '$cari'");
+	if(isset($_POST['pencarian'])){
+		$tanggal_awal = $_POST['tanggal_awal'];
+		$tanggal_akhir = $_POST['tanggal_akhir'];
+		$brg=mysql_query("SELECT * from barang where tanggal between '$tanggal_awal'and'$tanggal_akhir'");
 	}else{
 		$brg=mysql_query("select * from barang limit $start, $per_hal");
 	}
