@@ -49,13 +49,6 @@ Sampai Tanggal :<input type="date" name="end_date"><a href="javascript:void(0)" 
 </form>
 
 <?php
-if(isset($_POST['search'])){
-	$start_date = $_POST['start_date'];
-	$end_date = $_POST['end_date'];
-	if(empty($start_date)||empty($end_date)){
-		echo "<script>alert('Gagal!') 
-		document.location='barang.php'
-		</script>";
 	}else{
 		echo "Informasi : Hasil Pencarian data berdasarkan periode Tanggal";
 		echo $_POST['start_date'];
