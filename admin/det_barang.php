@@ -31,8 +31,8 @@ while($d=mysql_fetch_array($det)){
 			<td>Rp.<?php echo number_format($d['harga']) ?>,-</td>
 		</tr>
 		<tr>
-			<td>Jumlah</td>
-			<td><?php echo $d['jumlah'] ?></td>
+			<td>qty</td>
+			<td><?php echo $d['qty'] ?></td>
 		</tr>
 		<tr>
 			<td>Satuan</td>

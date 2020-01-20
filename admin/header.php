@@ -12,6 +12,10 @@
 	<script type="text/javascript" src="../assets/js/jquery.js"></script>
 	<script type="text/javascript" src="../assets/js/jquery.js"></script>
 	<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  	<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript" src="../assets/js/jquery-ui/jquery-ui.js"></script>	
 </head>
 <body>
@@ -45,9 +49,9 @@
 				</div>
 				<div class="modal-body">
 					<?php 
-					$periksa=mysql_query("select * from barang where jumlah <=3");
+					$periksa=mysql_query("select * from barang where qty <=3");
 					while($q=mysql_fetch_array($periksa)){	
-						if($q['jumlah']<=3){			
+						if($q['qty']<=3){			
 							echo "<div style='padding:5px' class='alert alert-warning'><span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $q['nama']."</a> yang tersisa sudah kurang dari 3 . silahkan pesan lagi !!</div>";	
 						}
 					}

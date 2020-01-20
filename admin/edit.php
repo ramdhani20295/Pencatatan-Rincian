@@ -32,7 +32,7 @@ while($d=mysql_fetch_array($det)){
 			</tr>
 			<tr>
 				<td>QTY</td>
-				<td><input type="text" class="form-control" name="jumlah" value="<?php echo $d['jumlah'] ?>"></td>
+				<td><input type="text" class="form-control" name="qty" value="<?php echo $d['qty'] ?>"></td>
 			</tr>
 			<tr>
 				<td></td>

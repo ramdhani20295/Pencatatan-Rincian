@@ -1,8 +1,10 @@
 <?php
 include 'config.php';
+
 require('../assets/pdf/fpdf.php');
 
 $pdf = new FPDF("L","cm","A4");
+
 
 $pdf->SetMargins(2,1,1);
 $pdf->AliasNbPages();
@@ -31,26 +33,34 @@ $pdf->Cell(5,0.7,"Di cetak pada : ".date("D-d/m/Y"),0,0,'C');
 $pdf->ln(1);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(1, 0.8, 'NO', 1, 0, 'C');
-$pdf->Cell(7, 0.8, 'Nama Barang', 1, 0, 'C');
-$pdf->Cell(3, 0.8, 'Jenis', 1, 0, 'C');
-$pdf->Cell(4, 0.8, 'Suplier', 1, 0, 'C');
-$pdf->Cell(4.5, 0.8, 'modal', 1, 0, 'C');
-$pdf->Cell(4.5, 0.8, 'harga', 1, 0, 'C');
-$pdf->Cell(2, 0.8, 'jumlah', 1, 1, 'C');
+$pdf->Cell(2.5, 0.8, 'tanggal', 1, 0, 'C');
+$pdf->Cell(5, 0.8, 'Nama Barang', 1, 0, 'C');
+$pdf->Cell(3, 0.8, 'Suplier', 1, 0, 'C');
+$pdf->Cell(2.5, 0.8, 'harga', 1, 0, 'C');
+$pdf->Cell(1.5, 0.8, 'qty', 1, 0, 'C');
+$pdf->Cell(2.5, 0.8, 'satuan', 1, 0, 'C');
+$pdf->Cell(3, 0.8, 'subtotal', 1, 1, 'C');
 $pdf->SetFont('Arial','',10);
 $no=1;
 $query=mysql_query("select * from barang");
 while($lihat=mysql_fetch_array($query)){
+	$sub = $lihat['harga'] * $lihat['qty'];
 	$pdf->Cell(1, 0.8, $no , 1, 0, 'C');
-	$pdf->Cell(7, 0.8, $lihat['nama'],1, 0, 'C');
-	$pdf->Cell(3, 0.8, $lihat['jenis'], 1, 0,'C');
-	$pdf->Cell(4, 0.8, $lihat['suplier'],1, 0, 'C');
-	$pdf->Cell(4.5, 0.8, $lihat['modal'], 1, 0,'C');
-	$pdf->Cell(4.5, 0.8, $lihat['harga'],1, 0, 'C');
-	$pdf->Cell(2, 0.8, $lihat['jumlah'], 1, 1,'C');
-
+	$pdf->Cell(2.5, 0.8, $lihat['tanggal'], 1, 0,'C');
+	$pdf->Cell(5, 0.8, $lihat['nama'],1, 0, 'C');
+	$pdf->Cell(3, 0.8, $lihat['suplier'],1, 0, 'C');
+	$pdf->Cell(2.5, 0.8, $lihat['harga'], 1, 0,'C');
+	$pdf->Cell(1.5, 0.8, $lihat['qty'],1, 0, 'C');
+	$pdf->Cell(2.5, 0.8, $lihat['satuan'], 1, 0,'C');
+	$pdf->Cell(3, 0.8, $sub, 1,1,'C');
 	$no++;
 }
+$total_nilai = 0;
+$total_nilai += $sub;
+error_reporting(0);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(18,0.8, 'Total',1,0,'C');
+$pdf->Cell(3,0.8, $total_nilai,1,1,'C');
 
 $pdf->Output("laporan_buku.pdf","I");
 

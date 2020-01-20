@@ -6,9 +6,9 @@
 <br/>
 
 <?php 
-$periksa=mysql_query("select * from barang where jumlah <=3");
+$periksa=mysql_query("select * from barang where qty <=3");
 while($q=mysql_fetch_array($periksa)){	
-	if($q['jumlah']<=3){	
+	if($q['qty']<=3){	
 		?>	
 		<script>
 			$(document).ready(function(){
@@ -42,6 +42,32 @@ $start = ($page - 1) * $per_hal;
 	</table>
 	<a style="margin-bottom:10px" href="lap_barang.php" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a>
 </div>
+<form action="" method="get" align="right">
+Tanggal Dari :<input type="date" name="start_date"><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.postform.tanggal_awal);return false;" ></a>
+Sampai Tanggal :<input type="date" name="end_date"><a href="javascript:void(0)" onClick="if(self.gfPop)gfPop.fPopCalendar(document.postform.tanggal_awal);return false;" ></a>
+<input type="submit" name="search"  value="search" class="btn btn-info">
+</form>
+
+<?php
+if(isset($_POST['search'])){
+	$start_date = $_POST['start_date'];
+	$end_date = $_POST['end_date'];
+	if(empty($start_date)||empty($end_date)){
+		echo "<script>alert('Gagal!') 
+		document.location='barang.php'
+		</script>";
+	}else{
+		echo "Informasi : Hasil Pencarian data berdasarkan periode Tanggal";
+		echo $_POST['start_date'];
+		echo $_POST['end_date'];
+		$query = mysql_query("SELECT * FROM barang WHERE tanggal BETWEEN '$start_date' AND '$end_date'");
+	}
+}
+?>
+
+
+
+
 <form action="cari_act.php" method="get">
 	<div class="input-group col-md-5 col-md-offset-7">
 		<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
@@ -57,6 +83,7 @@ $start = ($page - 1) * $per_hal;
 		<th class="col-md-2">Harga Beli</th>
 		<th class="col-md-1">QTY</th>
 		<th class="col-md-1">Total</th>
+		<!-- <th class="col-md-1">Total</th> -->
 		<!-- <th class="col-md-1">Sisa</th>		 -->
 		<th class="col-md-3">Opsi</th>
 	</tr>
@@ -76,8 +103,9 @@ $start = ($page - 1) * $per_hal;
 			<td><?php echo $b['tanggal'] ?></td>
 			<td><?php echo $b['nama'] ?></td>
 			<td>Rp.<?php echo number_format($b['harga']) ?>,-</td>
-			<td><?php echo $b['jumlah'] ?></td>
-			<td>Rp.<?php echo $b['jumlah'] * $b['harga']?></td>
+			<td><?php echo $b['qty'] ?></td>
+			<td>Rp.<?php echo $sub[] = $b['qty'] * $b['harga']?></td>
+			<!-- <td>Rp.<?php echo $tot = array_sum($sub);?></td> -->
 			<td>
 				<a href="det_barang.php?id=<?php echo $b['id']; ?>" class="btn btn-info">Detail</a>
 				<a href="edit.php?id=<?php echo $b['id']; ?>" class="btn btn-warning">Edit</a>
@@ -88,7 +116,10 @@ $start = ($page - 1) * $per_hal;
 	}
 	?>
 	
+
 </table>
+
+
 <ul class="pagination">			
 			<?php 
 			for($x=1;$x<=$halaman;$x++){
@@ -127,7 +158,7 @@ $start = ($page - 1) * $per_hal;
 					</div>	
 					<div class="form-group">
 						<label>QTY</label>
-						<input name="jumlah" type="text" class="form-control" placeholder="QTY">
+						<input name="qty" type="text" class="form-control" placeholder="QTY">
 					</div>
 					<div class="form-group">
 						<label>Satuan</label>
@@ -143,3 +174,10 @@ $start = ($page - 1) * $per_hal;
 		</div>
 	</div>
 </div>
+
+
+
+<?php 
+include 'footer.php';
+
+?>
