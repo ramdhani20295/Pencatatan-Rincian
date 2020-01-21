@@ -1,7 +1,34 @@
 <?php include 'header.php'; ?>
 
 <h3><span class="glyphicon glyphicon-briefcase"></span>  Data Barang</h3>
+<div class="col-md-5">
+	<form action="upload_nota.php" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+			<input name="user" type="hidden" value="<?php echo $_SESSION['nama']; ?>">
+		</div>
+	<div class="form-group">
+			<label>Foto</label>
+			<input name="foto" type="file" class="form-control" placeholder="Password Lama ..">
+		</div>		
+		<div class="form-group">
+			<label></label>
+			<input type="submit" class="btn btn-info" value="Upload">
+		</div>																	
+	</form>
+</div>
+<?php 
+if(isset($_GET['pesan'])){
+	$pesan=mysql_real_escape_string($_GET['pesan']);
+	if($pesan=="oke"){
+		echo "<div class='alert alert-success'>file telah diupload</div>";
+	}
+}
+?>
+<br>
+<br>
 <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-plus"></span>Tambah Barang</button>
+<br>
+
 <br/>
 <br/>
 
@@ -42,35 +69,7 @@ $start = ($page - 1) * $per_hal;
 	</table>
 	<!-- <a style="margin-bottom:10px" href="lap_barang.php" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a> -->
 
-	<button style="margin-bottom:10px" style="align:right" data-toggle="modal" data-target="#modal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-print"></span>Cetak</button>
 
-	<div id="modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Tambah Barang Baru</h4>
-			</div>
-			<div class="modal-body">
-				<form action="lap_barang.php" method="post">
-					<div class="form-group">
-						<label>Dari Tanggal </label>
-						<input name="start_date" type="date" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Sampai Tanggal </label>
-						<input name="end_date" type="date" class="form-control">
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-					<input type="submit" class="btn btn-primary" value="Simpan">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
 
 
 </div>

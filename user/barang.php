@@ -1,7 +1,35 @@
 <?php include 'header.php'; ?>
 
 <h3><span class="glyphicon glyphicon-briefcase"></span>  Data Barang</h3>
-<button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-plus"></span>Tambah Barang</button>
+<button style="margin-bottom:10px" style="align:right" data-toggle="modal" data-target="#modal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-print"></span>Cetak</button>
+
+<div id="modal" class="modal fade">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title">Cetak</h4>
+		</div>
+		<div class="modal-body">
+			<form action="lap_barang.php" method="post">
+				<div class="form-group">
+					<label>Dari Tanggal </label>
+					<input name="start_date" type="date" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Sampai Tanggal </label>
+					<input name="end_date" type="date" class="form-control">
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+				<input type="submit" class="btn btn-primary" value="cetak">
+			</div>
+		</form>
+	</div>
+</div>
+</div>
 <br/>
 <br/>
 
@@ -42,35 +70,7 @@ $start = ($page - 1) * $per_hal;
 	</table>
 	<!-- <a style="margin-bottom:10px" href="lap_barang.php" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a> -->
 
-	<button style="margin-bottom:10px" style="align:right" data-toggle="modal" data-target="#modal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-print"></span>Cetak</button>
 
-	<div id="modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Tambah Barang Baru</h4>
-			</div>
-			<div class="modal-body">
-				<form action="lap_barang.php" method="post">
-					<div class="form-group">
-						<label>Dari Tanggal </label>
-						<input name="start_date" type="date" class="form-control">
-					</div>
-					<div class="form-group">
-						<label>Sampai Tanggal </label>
-						<input name="end_date" type="date" class="form-control">
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-					<input type="submit" class="btn btn-primary" value="Simpan">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
 
 
 </div>
@@ -98,7 +98,7 @@ $start = ($page - 1) * $per_hal;
 		<th class="col-md-3">Nama Barang</th>
 		<th class="col-md-2">Harga Beli</th>
 		<th class="col-md-1">QTY</th>
-		<th class="col-md-1">Total</th>
+		<th class="col-md-2">Total</th>
 		<!-- <th class="col-md-1">Total</th> -->
 		<!-- <th class="col-md-1">Sisa</th>		 -->
 		<th class="col-md-3">Opsi</th>
@@ -125,8 +125,6 @@ $start = ($page - 1) * $per_hal;
 			<!-- <td>Rp.<?php echo $tot = array_sum($sub);?></td> -->
 			<td>
 				<a href="det_barang.php?id=<?php echo $b['id']; ?>" class="btn btn-info">Detail</a>
-				<a href="edit.php?id=<?php echo $b['id']; ?>" class="btn btn-warning">Edit</a>
-				<a onclick="if(confirm('Apakah anda yakin ingin menghapus data ini ??')){ location.href='hapus.php?id=<?php echo $b['id']; ?>' }" class="btn btn-danger">Hapus</a>
 			</td>
 		</tr>		
 		<?php 

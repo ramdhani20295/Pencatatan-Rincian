@@ -82,7 +82,7 @@ $pdf->Cell(3,0.8, $total_nilai,1,1,'C');
 // }
 
 
-$pdf->Output("laporan_buku.pdf","I");
+$pdf->Output("rincian.pdf","I");
 
 ?>
 
