@@ -6,7 +6,7 @@
 	include 'cek.php';
 	include 'config.php';
 	?>
-	<title>KIOS MALASNGODING</title>
+	<title>AJB BUMIPUTERA</title>
 	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="../assets/js/jquery-ui/jquery-ui.css">
 	<script type="text/javascript" src="../assets/js/jquery.js"></script>
@@ -22,7 +22,7 @@
 	<div class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="http://www.malasngoding.com" class="navbar-brand">KIOS MALASNGODING</a>
+				<a href="http://www.malasngoding.com" class="navbar-brand">AJB BUMIPUTERA</a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -69,7 +69,7 @@
 		<div class="row">
 			<?php 
 			$use=$_SESSION['uname'];
-			$fo=mysql_query("select foto from admin where uname='$use'");
+			$fo=mysql_query("select foto from user where uname='$use'");
 			while($f=mysql_fetch_array($fo)){
 				?>				
 

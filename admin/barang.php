@@ -40,7 +40,39 @@ $start = ($page - 1) * $per_hal;
 			<td><?php echo $halaman; ?></td>
 		</tr>
 	</table>
-	<a style="margin-bottom:10px" href="lap_barang.php" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a>
+	<!-- <a style="margin-bottom:10px" href="lap_barang.php" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a> -->
+
+	<button style="margin-bottom:10px" style="align:right" data-toggle="modal" data-target="#modal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-print"></span>Cetak</button>
+
+	<div id="modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Tambah Barang Baru</h4>
+			</div>
+			<div class="modal-body">
+				<form action="lap_barang.php" method="post">
+					<div class="form-group">
+						<label>Dari Tanggal </label>
+						<input name="start_date" type="date" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Sampai Tanggal </label>
+						<input name="end_date" type="date" class="form-control">
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+					<input type="submit" class="btn btn-primary" value="Simpan">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
 </div>
 <form action="" method="post" align="right">
 <td width="125"><b>Dari Tanggal</b></td>
@@ -89,7 +121,7 @@ $start = ($page - 1) * $per_hal;
 			<td><?php echo $b['nama'] ?></td>
 			<td>Rp.<?php echo number_format($b['harga']) ?>,-</td>
 			<td><?php echo $b['qty'] ?></td>
-			<td>Rp.<?php echo $sub[] = $b['qty'] * $b['harga']?></td>
+			<td>Rp.<?php echo $b['subtotal']?></td>
 			<!-- <td>Rp.<?php echo $tot = array_sum($sub);?></td> -->
 			<td>
 				<a href="det_barang.php?id=<?php echo $b['id']; ?>" class="btn btn-info">Detail</a>
@@ -105,6 +137,60 @@ $start = ($page - 1) * $per_hal;
 </table>
 
 
+<!--test Modal-->
+<!-- <div class="container-fluid">
+	<div class="row">
+	
+		<div class="col-md-12">
+			 <a id="modal-599578" href="#modal-container-599578" role="button" class="btn" data-toggle="modal"><span class='glyphicon glyphicon-print'></span>Cetak</a>
+			 		
+			<div class="modal fade" id="modal-container-599578" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								Cetak rincian
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						
+						<div class="modal-body">
+						<form action="lap_barang.php" method="post" target="_blank">
+						<div class="form-group">
+						<label>Dari Tanggal</label>
+						<input name="start_date" type="date" vaule="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Input Tanggal">
+						</div>
+						<div class="form-group">
+						<label>Sampai Tanggal</label>
+						<input name="end_date" type="date" vaule="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Input Tanggal">
+						</div>
+
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-primary"  name="cetak" value="cetak">
+								Cetak
+							</button> 
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">
+								Close
+							</button>
+						</div>
+						</form>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+</div> -->
+
+<!-- -->
 <ul class="pagination">			
 			<?php 
 			for($x=1;$x<=$halaman;$x++){
