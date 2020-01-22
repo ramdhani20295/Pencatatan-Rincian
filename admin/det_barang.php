@@ -9,7 +9,8 @@ include 'header.php';
 $id_brg=mysql_real_escape_string($_GET['id']);
 
 
-$det=mysql_query("select * from barang where id='$id_brg'")or die(mysql_error());
+$det=mysql_query("SELECT
+barang.*, nota.nama_gambar FROM barang INNER JOIN nota ON barang.idnota = nota.idnota WHERE id='$id_brg'")or die(mysql_error());
 while($d=mysql_fetch_array($det)){
 	?>					
 	<table class="table">
@@ -20,11 +21,6 @@ while($d=mysql_fetch_array($det)){
 		<tr>
 			<td>Nama</td>
 			<td><?php echo $d['nama'] ?></td>
-		</tr>
-		
-		<tr>
-			<td>Suplier</td>
-			<td><?php echo $d['suplier'] ?></td>
 		</tr>
 		<tr>
 			<td>Harga</td>
@@ -37,6 +33,14 @@ while($d=mysql_fetch_array($det)){
 		<tr>
 			<td>Satuan</td>
 			<td><?php echo $d['satuan'] ?></td>
+		</tr>
+		<tr>
+			<td>Subtotal</td>
+			<td>Rp.<?php echo number_format($d['subtotal']) ?></td>
+		</tr>
+		<tr>
+		<td>Gambar</td>
+			<td><?echo $d['nama_gambar']?></td>
 		</tr>
 	</table>
 	<?php 

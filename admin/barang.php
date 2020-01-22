@@ -1,21 +1,4 @@
 <?php include 'header.php'; ?>
-
-<h3><span class="glyphicon glyphicon-briefcase"></span>  Data Barang</h3>
-<div class="col-md-5">
-	<form action="upload_nota.php" method="post" enctype="multipart/form-data">
-	<div class="form-group">
-			<input name="user" type="hidden" value="<?php echo $_SESSION['nama']; ?>">
-		</div>
-	<div class="form-group">
-			<label>Foto</label>
-			<input name="foto" type="file" class="form-control" placeholder="Password Lama ..">
-		</div>		
-		<div class="form-group">
-			<label></label>
-			<input type="submit" class="btn btn-info" value="Upload">
-		</div>																	
-	</form>
-</div>
 <?php 
 if(isset($_GET['pesan'])){
 	$pesan=mysql_real_escape_string($_GET['pesan']);
@@ -24,8 +7,35 @@ if(isset($_GET['pesan'])){
 	}
 }
 ?>
-<br>
-<br>
+<h3><span class="glyphicon glyphicon-briefcase"></span>  Data Barang</h3>
+<button style="margin-bottom:20px" data-toggle="modal" data-target="#upload" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-plus"></span>Upload Nota</button>
+<div id="upload" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Upload Nota</h4>
+			</div>
+			<form action="upload_nota.php" method="post" enctype="multipart/form-data"> 	
+			<div class="form-group">
+			<label>Foto</label>
+			<input name="file" type="file" class="form-control" placeholder="Password Lama ..">
+		</div>		
+		<div class="form-group">
+			<label></label>
+		</div>
+			<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+					<input type="submit" class="btn btn-primary" value="Upload" name="upload">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2"><span class="glyphicon glyphicon-plus"></span>Tambah Barang</button>
 <br>
 
@@ -100,13 +110,14 @@ $start = ($page - 1) * $per_hal;
 		<th class="col-md-1">Total</th>
 		<!-- <th class="col-md-1">Total</th> -->
 		<!-- <th class="col-md-1">Sisa</th>		 -->
+		<th class="col-md-1">Nota</th>
 		<th class="col-md-3">Opsi</th>
 	</tr>
 	<?php 
 	if(isset($_POST['pencarian'])){
 		$tanggal_awal = $_POST['tanggal_awal'];
 		$tanggal_akhir = $_POST['tanggal_akhir'];
-		$brg=mysql_query("SELECT * from barang where tanggal between '$tanggal_awal'and'$tanggal_akhir'");
+		$brg=mysql_query("SELECT * from barang, nota where barang.nota_idnota = nota.idnota AND tanggal between '$tanggal_awal'and'$tanggal_akhir'");
 	}else{
 		$brg=mysql_query("select * from barang limit $start, $per_hal");
 	}
@@ -121,6 +132,7 @@ $start = ($page - 1) * $per_hal;
 			<td>Rp.<?php echo number_format($b['harga']) ?>,-</td>
 			<td><?php echo $b['qty'] ?></td>
 			<td>Rp.<?php echo $b['subtotal']?></td>
+			<td><?php echo $b['idnota'] ?></td>
 			<!-- <td>Rp.<?php echo $tot = array_sum($sub);?></td> -->
 			<td>
 				<a href="det_barang.php?id=<?php echo $b['id']; ?>" class="btn btn-info">Detail</a>
@@ -208,7 +220,10 @@ $start = ($page - 1) * $per_hal;
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">Tambah Barang Baru</h4>
 			</div>
+
 			<div class="modal-body">
+			<!-- <?$det=mysql_query("SELECT barang.id, barang.tanggal, barang.nama, barang.harga, barang.qty, barang.satuan, barang.subtotal, nota.idnota, nota.gambar, nota.nama_gambar FROM barang INNER JOIN nota ON ")or die(mysql_error());
+			while($d=mysql_fetch_array($det)){?> -->
 				<form action="tmb_brg_act.php" method="post">
 					<div class="form-group">
 						<label>Tanggal</label>
@@ -218,10 +233,6 @@ $start = ($page - 1) * $per_hal;
 						<label>Nama Barang</label>
 						<input name="nama" type="text" class="form-control" placeholder="Nama Barang ..">
 					</div>
-					<div class="form-group">
-						<label>Suplier</label>
-						<input name="suplier" type="text" class="form-control" placeholder="Suplier ..">
-					</div>	
 					<div class="form-group">
 						<label>Harga Beli</label>
 						<input name="harga" type="text" class="form-control" placeholder="Harga Beli">
@@ -234,6 +245,12 @@ $start = ($page - 1) * $per_hal;
 						<label>Satuan</label>
 						<input name="satuan" type="text" class="form-control" placeholder="Satuan ..">
 					</div>
+					<!-- <div class="form-group">
+						<label for="nama">Nota</label>
+						<select name="nama" id="nama" class="form-control">
+			<option value="<?echo $b['idnota'];?>"><?echo $d['idnota']?><?}?></option>
+				</select>
+					</div> -->
 
 				</div>
 				<div class="modal-footer">
